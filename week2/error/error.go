@@ -1,8 +1,8 @@
 package main
 
 import (
-	"errors"
 	"fmt"
+	"github.com/pkg/errors"
 	"io"
 	"os"
 )
@@ -17,11 +17,13 @@ func main() {
 	//	fmt.Println(v)
 	//}
 	_, err := opfile("1")
-	var another queryError
-	errors.Is(err, &another)
-	errors.As(err, &another)
+	err, _ = underlyingError(err)
+
+	//var another queryError
+	//errors.Is(err, &another)
+	//errors.As(err, &another)
 	//fmt.Printf("original error : %T %v\n",errors.Cause(err),errors.Cause(err))
-	//fmt.Printf("stack error: \n%+v\n",err )
+	fmt.Printf("stack error: \n%+v\n", err)
 }
 
 func errout() (int, error) {
@@ -72,6 +74,8 @@ func WriteResponse(w io.Writer, st Status, header []Header, body io.Reader) erro
 	for _, h := range header {
 		fmt.Fprintf(ew, "%s:%s\r\n", h.Key, h.value)
 	}
+	//os.PathError{}
+
 	fmt.Fprint(ew, "\r\n")
 	io.Copy(ew, body)
 	return ew.err
@@ -86,14 +90,23 @@ func (e *queryError) UnWrap() error {
 	return e.err
 }
 func (e *queryError) Error() string {
-	return "error msg :" + e.query
+	return "error msg :" + e.query + "  " + e.Error()
 }
 
 func opfile(path string) ([]byte, error) {
 	_, err := os.Open(path)
-	_, te := err.(*queryError)
+	//_, te := err.(*queryError)
 	if err != nil {
-		err = fmt.Errorf("opfile faild:%w", te)
+		return nil, &queryError{"query", err}
 	}
 	return nil, err
+}
+
+// underlyingError returns the underlying error for known os error types.
+func underlyingError(err error) (error, string) {
+	switch err := err.(type) {
+	case *queryError:
+		return err.err, err.query
+	}
+	return err, ""
 }
