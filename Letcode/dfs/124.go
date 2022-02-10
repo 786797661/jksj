@@ -6,12 +6,6 @@ func main() {
 
 }
 
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
-
 func maxPathSum(root *TreeNode) int {
 	//return maxThreeNode(root)
 	var maxGin func(*TreeNode) int
