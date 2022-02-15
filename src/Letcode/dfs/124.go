@@ -2,10 +2,6 @@ package main
 
 import "math"
 
-func main() {
-
-}
-
 func maxPathSum(root *TreeNode) int {
 	//return maxThreeNode(root)
 	var maxGin func(*TreeNode) int

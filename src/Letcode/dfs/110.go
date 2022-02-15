@@ -1,9 +1,5 @@
 package main
 
-func main() {
-
-}
-
 func isBalanced(root *TreeNode) bool {
 	if root == nil {
 		return true

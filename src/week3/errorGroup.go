@@ -22,6 +22,7 @@ func Httpserver(srv *http.Server) error {
 
 func main() {
 	ctx := context.Background()
+
 	ctx, cancel := context.WithCancel(ctx)
 	group, errCtx := errgroup.WithContext(ctx)
 	srv := &http.Server{Addr: ":9090"}
@@ -42,6 +43,9 @@ func main() {
 	group.Go(func() error {
 		for {
 			select {
+			case <-ctx.Done():
+				fmt.Println("go ctx " + ctx.Err().Error())
+				return ctx.Err()
 			case <-errCtx.Done():
 				fmt.Println("go errCtx " + errCtx.Err().Error())
 				return errCtx.Err()
