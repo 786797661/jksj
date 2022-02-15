@@ -1,30 +1,26 @@
 package main
 
-import (
-	"fmt"
-)
+//type TreeNode struct {
+//	Val   int
+//	Left  *TreeNode
+//	Right *TreeNode
+//}
 
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
-
-func main() {
-
-	//[5,4,6,null,null,3,7]
-
-	node := TreeNode{Val: 5}
-	node1 := TreeNode{Val: 4}
-	node2 := TreeNode{Val: 6}
-	node3 := TreeNode{Val: 3}
-	node4 := TreeNode{Val: 7}
-	node.Left = &node1
-	node.Right = &node2
-	node2.Left = &node3
-	node2.Right = &node4
-	fmt.Println(isValidBST(&node))
-}
+//func main() {
+//
+//	//[5,4,6,null,null,3,7]
+//
+//	node := TreeNode{Val: 5}
+//	node1 := TreeNode{Val: 4}
+//	node2 := TreeNode{Val: 6}
+//	node3 := TreeNode{Val: 3}
+//	node4 := TreeNode{Val: 7}
+//	node.Left = &node1
+//	node.Right = &node2
+//	node2.Left = &node3
+//	node2.Right = &node4
+//	fmt.Println(isValidBST(&node))
+//}
 func isValidBST(root *TreeNode) bool {
 	return helper(root)
 }
