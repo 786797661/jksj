@@ -1,11 +1,11 @@
 package main
 
-func main() {
-	treeNode := TreeNode{
-		Val: 0,
-	}
-	deleteNode(&treeNode, 0)
-}
+//func main() {
+//	treeNode := TreeNode{
+//		Val: 0,
+//	}
+//	deleteNode(&treeNode, 0)
+//}
 
 type TreeNode struct {
 	Val   int
@@ -13,7 +13,7 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
-func deleteNode(root *TreeNode, key int) *TreeNode {
+func deleteNodeTest(root *TreeNode, key int) *TreeNode {
 	nodedel := findNode(root, key)
 	if nodedel == nil {
 		return root
@@ -33,19 +33,25 @@ func deleteNode(root *TreeNode, key int) *TreeNode {
 			nodedel.Left = nil
 		}
 	}
-
-	//如果删除的是最末级节点那么降这个节点值返回nil
-	if nodedel.Left == nil && nodedel.Right == nil {
+	if nodedel == root {
+		return nil
+	} else {
 		nodedel = nil
 	}
 	return root
-
 }
 
 func findNode(root *TreeNode, key int) *TreeNode {
-	if root == nil || root.Val == key {
+	if root == nil {
+		return nil
+	}
+	if root.Val == key {
+		//if root.Left == nil && root.Right == nil {
+		//
+		//}
 		return root
 	}
+
 	left := findNode(root.Left, key)
 	right := findNode(root.Right, key)
 	if left == nil && right == nil {

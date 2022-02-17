@@ -19,7 +19,8 @@ func pathSum(root *TreeNode, targetSum int) (ans [][]int) {
 		path = append(path, node.Val)
 		defer func() { path = path[:len(path)-1] }()
 		if node.Left == nil && node.Right == nil && left == 0 {
-			ans = append(ans, append([]int(nil), path...))
+			temp := append([]int(nil), path...)
+			ans = append(ans, temp)
 			return
 		}
 		dfs(node.Left, left)
