@@ -2,10 +2,6 @@ package main
 
 import "container/list"
 
-func main() {
-
-}
-
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode

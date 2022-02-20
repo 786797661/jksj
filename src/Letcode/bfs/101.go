@@ -1,5 +1,13 @@
 package main
 
+import "fmt"
+
+func main() {
+	n := 3
+	for i := 0; i < n*2-1; i++ {
+		fmt.Print(i % n)
+	}
+}
 func isSymmetric(root *TreeNode) bool {
 	return check(root, root)
 }
