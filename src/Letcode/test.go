@@ -1,6 +1,16 @@
-package juz
+package main
 
-import "container/list"
+import (
+	"container/list"
+	"fmt"
+)
+
+func main() {
+	//[1,1,1,1,0,1,0,0,1,1]]
+	mat := [][]int{{1, 0, 1, 1, 0, 0, 1, 0, 0, 1}, {0, 1, 1, 0, 1, 0, 1, 0, 1, 1}, {0, 0, 1, 0, 1, 0, 0, 1, 0, 0}, {1, 0, 1, 0, 1, 1, 1, 1, 1, 1}, {0, 1, 0, 1, 1, 0, 0, 0, 0, 1}, {0, 0, 1, 0, 1, 1, 1, 0, 1, 0},
+		{0, 1, 0, 1, 0, 1, 0, 0, 1, 1}, {1, 0, 0, 0, 1, 1, 1, 1, 0, 1}, {1, 1, 1, 1, 1, 1, 1, 0, 1, 0}, {1, 1, 1, 1, 0, 1, 0, 0, 1, 1}}
+	updateMatrix(mat)
+}
 
 func updateMatrix(mat [][]int) [][]int {
 	if mat == nil {
@@ -27,7 +37,10 @@ func updateMatrix(mat [][]int) [][]int {
 		queu.Remove(queu.Front())
 		levels := point[0]
 		k := point[1]
-		value := mat[levels][k]
+		if levels == 8 && k == 0 {
+			fmt.Println("向下")
+		}
+		value := res[levels][k]
 		value++
 		//上，判断是否存在 level-1,k
 		if levels-1 >= 0 {
