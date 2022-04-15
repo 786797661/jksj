@@ -22,9 +22,9 @@ func Httpserver(srv *http.Server) error {
 
 func main() {
 	ctx := context.Background()
-
 	ctx, cancel := context.WithCancel(ctx)
 	group, errCtx := errgroup.WithContext(ctx)
+
 	srv := &http.Server{Addr: ":9090"}
 	//启动Httpserver
 	group.Go(func() error {
